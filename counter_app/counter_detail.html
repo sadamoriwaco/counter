@@ -1,0 +1,28 @@
+<!-- counter_app/templates/counter_app/counter_detail.html -->
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Counter Detail</title>
+</head>
+<body>
+    <h1>Counter Detail</h1>
+    <h2>{{ counter.name }}</h2>
+    <p>Count 1: {{ counter.count1 }}</p>
+    <p>Count 2: {{ counter.count2 }}</p>
+    <p>Count 3: {{ counter.count3 }}</p>
+    <p>Count 4: {{ counter.count4 }}</p>
+    <form method="post" action="{% url 'increment' counter.id %}">
+        {% csrf_token %}
+        <button type="submit" name="increment1">Increment Count 1</button>
+        <button type="submit" name="increment2">Increment Count 2</button>
+        <button type="submit" name="increment3">Increment Count 3</button>
+        <button type="submit" name="increment4">Increment Count 4</button>
+    </form>
+    <form method="post" action="{% url 'reset' counter.id %}">
+        {% csrf_token %}
+        <button type="submit">Reset Counts</button>
+    </form>
+</body>
+</html>

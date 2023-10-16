@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Counter App</title>
+</head>
+<body>
+    <h1>Counter App</h1>
+    <form method="post" action="{% url 'save' %}">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="Counter Name" required>
+        <button type="submit">Save</button>
+    </form>
+    <ul>
+        {% for counter in counters %}
+            <li>
+                <h2>{{ counter.name }}</h2>
+                <form method="post" action="{% url 'increment' counter.id %}">
+                    {% csrf_token %}
+                    <button type="submit" name="increment1">Increment Count 1</button>
+                    <button type="submit" name="increment2">Increment Count 2</button>
+                    <button type="submit" name="increment3">Increment Count 3</button>
+                    <button type="submit" name="increment4">Increment Count 4</button>
+                </form>
+                <p>Count 1: {{ counter.count1 }}</p>
+                <p>Count 2: {{ counter.count2 }}</p>
+                <p>Count 3: {{ counter.count3 }}</p>
+                <p>Count 4: {{ counter.count4 }}</p>
+                <form method="post" action="{% url 'reset' counter.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Reset Counts</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
